@@ -1,5 +1,8 @@
 
 char msg = 'a';
+const int lightPin  = 0;
+int light           = 0;
+
 
 void setup()
 {
@@ -11,9 +14,14 @@ void setup()
 
 void loop()
 {
+
+    light = analogRead(lightPin);
+
     if(Serial.available()){
         msg = Serial.read();
+        if(msg == 'r'){
+            Serial.write('r');
+        }
+        digitalWrite(LED_BUILTIN, msg == 'a' ? LOW : HIGH);
     }
-
-    digitalWrite(LED_BUILTIN, msg == 'a'? LOW : HIGH);
 }
