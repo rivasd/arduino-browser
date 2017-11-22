@@ -4,12 +4,14 @@ const int lightPin  = 0;
 int light           = 0;
 
 int lptPin = 2;
+int statusPin = 7;
 
 unsigned long latency;
 
 void setup()
 {
     pinMode(LED_BUILTIN, OUTPUT);
+    pinMode(statusPin, OUTPUT);
     pinMode(lptPin, INPUT);
     digitalWrite(LED_BUILTIN, LOW);
 
@@ -19,7 +21,7 @@ void setup()
 void loop()
 {
 
-    //light = analogRead(lightPin);
+    digitalWrite(statusPin, digitalRead(lptPin) ? HIGH : LOW);
 
     if(Serial.available()){
         msg = Serial.read();
